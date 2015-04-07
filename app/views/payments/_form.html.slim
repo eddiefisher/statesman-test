@@ -1,0 +1,23 @@
+= form_for(@payment) do |f|
+  - if @payment.errors.any?
+    div#error_explanation
+      h2
+        = pluralize(@payment.errors.count, "error")
+        | prohibited this payment from being saved:
+      ul
+        - @payment.errors.full_messages.each do |message|
+          li = message
+
+  div.field
+    = f.label :name
+    = f.text_field :name
+  div.field
+    = f.label :count
+    = f.text_field :count
+  div.field
+    - @payment.state_machine.allowed_transitions.each do |state|
+      = f.label :state
+        strong> = state
+        = f.radio_button :state, state
+  div.actions
+    = f.submit

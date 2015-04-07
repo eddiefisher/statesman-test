@@ -1,0 +1,15 @@
+p#notice = notice
+center
+  p
+    strong> Name:
+    = @payment.name
+  p
+    strong> Count:
+    = @payment.count
+  p
+    strong> Status:
+    = @payment.state_machine.current_state
+
+  = link_to 'Edit', edit_payment_path(@payment)
+  |&nbsp;
+  = link_to 'Back', payments_path
