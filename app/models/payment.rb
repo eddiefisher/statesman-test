@@ -3,9 +3,9 @@ class Payment < ActiveRecord::Base
 
   has_many :payment_transitions
 
-  # attr_accessor :state
+  attr_accessor :state
 
-  # before_save :change_state
+  before_save :change_state
 
   def state_machine
     @state_machine ||= PaymentStateMachine.new(self, transition_class: PaymentTransition)
