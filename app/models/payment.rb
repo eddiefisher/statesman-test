@@ -5,7 +5,7 @@ class Payment < ActiveRecord::Base
 
   attr_accessor :state
 
-  before_save :change_state
+  before_update :change_state
 
   def state_machine
     @state_machine ||= PaymentStateMachine.new(self, transition_class: PaymentTransition)
@@ -22,6 +22,7 @@ class Payment < ActiveRecord::Base
   end
 
   def change_state
+    return unless state
     state_machine.transition_to!(self.state.to_sym)
   end
 end
