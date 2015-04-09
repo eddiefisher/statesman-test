@@ -3,6 +3,8 @@ class Payment < ActiveRecord::Base
 
   has_many :payment_transitions
 
+  scope :with_transaction, -> { includes(:payment_transitions) }
+
   attr_accessor :state
 
   before_update :change_state
